@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinformControlExt", "WinformControlExt\WinformControlExt.csproj", "{BC894A5D-B9C5-4F23-9226-3C546C05DC3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Examples\Examples.csproj", "{443A61A0-1C3A-4369-A0DA-2A01B8333E32}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC894A5D-B9C5-4F23-9226-3C546C05DC3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC894A5D-B9C5-4F23-9226-3C546C05DC3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC894A5D-B9C5-4F23-9226-3C546C05DC3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC894A5D-B9C5-4F23-9226-3C546C05DC3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{443A61A0-1C3A-4369-A0DA-2A01B8333E32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{443A61A0-1C3A-4369-A0DA-2A01B8333E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{443A61A0-1C3A-4369-A0DA-2A01B8333E32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{443A61A0-1C3A-4369-A0DA-2A01B8333E32}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A1B48A8D-7FE6-4174-9E8A-EE81C0E6C410}
+	EndGlobalSection
+EndGlobal
