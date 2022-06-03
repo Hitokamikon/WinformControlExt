@@ -148,20 +148,21 @@
             // chartPanel
             // 
             this.chartPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chartPanel.Location = new System.Drawing.Point(0, 39);
+            this.chartPanel.Location = new System.Drawing.Point(0, 41);
             this.chartPanel.Name = "chartPanel";
-            this.chartPanel.Size = new System.Drawing.Size(871, 418);
+            this.chartPanel.Size = new System.Drawing.Size(871, 416);
             this.chartPanel.TabIndex = 2;
             // 
             // menuStrip1
             // 
             this.menuStrip1.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.图表ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(871, 39);
+            this.menuStrip1.Size = new System.Drawing.Size(871, 41);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
