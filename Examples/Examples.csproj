@@ -47,17 +47,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChartExtExample.cs" />
-    <Compile Include="ChartExtExampleForm.cs">
+    <Compile Include="Charts\ChartExampleTreeNode.cs" />
+    <Compile Include="Charts\ChartExtExample.cs" />
+    <Compile Include="Charts\ChartExtExampleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChartExtExampleForm.Designer.cs">
+    <Compile Include="Charts\ChartExtExampleForm.Designer.cs">
       <DependentUpon>ChartExtExampleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Example.cs" />
+    <Compile Include="ExampleTreeNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ChartExtExampleForm.resx">
+    <EmbeddedResource Include="Charts\ChartExtExampleForm.resx">
       <DependentUpon>ChartExtExampleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

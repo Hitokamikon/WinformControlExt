@@ -9,5 +9,7 @@ namespace WinformControlExt.ChartExts
     public enum ChartFunction
     {
         One_Multi_Switch,
+        ChangeChartAreaLineColor,
+        GetChartAreaInnerCoordinate,
     }
 }
