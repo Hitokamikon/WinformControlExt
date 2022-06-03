@@ -55,6 +55,9 @@
     <Compile Include="Charts\ChartExtExampleForm.Designer.cs">
       <DependentUpon>ChartExtExampleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Charts\ChartExtExampleForm.Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Example.cs" />
     <Compile Include="ExampleTreeNode.cs" />
     <Compile Include="Program.cs" />
@@ -70,6 +73,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -90,5 +94,6 @@
       <Name>WinformControlExt</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

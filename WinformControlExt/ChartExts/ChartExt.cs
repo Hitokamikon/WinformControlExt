@@ -10,113 +10,23 @@ using WinformControlExt.ControlEvents;
 
 namespace WinformControlExt.ChartExts
 {
-    static public class ChartExt
+#if ComplieChart
+    static public partial class ChartExt
     {
-        static Dictionary<Chart, Action<object, MouseEventArgs>> doubleClickDic = new Dictionary<Chart, Action<object, MouseEventArgs>>();
+        static ToolTip toolTip = new ToolTip();
 
-        static Dictionary<Chart, Action<object, MouseEventArgs>> mouseWheelDic = new Dictionary<Chart, Action<object, MouseEventArgs>>();
-
-        static Action<object, MouseEventArgs> GetDoubleClickAction(Chart chart, ChartFunction chartFunction, params object[] paras)
+        static void HideToolTip(IWin32Window window)
         {
-            return (object sender, MouseEventArgs args) =>
+            if (toolTip.Tag != null)
             {
-                Action<Chart> action = null;
-                switch (args.Button)
+                if(toolTip.Tag is MarkPoint)
                 {
-                    case MouseButtons.Left:
-                        action = GetChartAction(chartFunction, args , paras);
-                        break;
+                    MarkPoint markPoint = toolTip.Tag as MarkPoint;
+                    markPoint?.Reset();
                 }
-                if (action != null)
-                    action(chart);
-            };
-        }
-
-        static Action<Chart> GetChartAction(ChartFunction chartFunction , MouseEventArgs args , params object[] objs)
-        {
-            switch (chartFunction)
-            {
-                case ChartFunction.One_Multi_Switch:
-                    return (Chart chart) =>
-                    {
-                        int visibleAreaCount = chart.ChartAreas.Where(area => area.Visible).Count();
-                        if (visibleAreaCount == 1)
-                        {
-                            for (int i = 0; i < chart.ChartAreas.Count; i++)
-                            {
-                                ChartArea chartArea = chart.ChartAreas[i];
-                                chartArea.Visible = true;
-                            }
-                        }
-                        else
-                        {
-                            for (int i = 0; i < chart.ChartAreas.Count; i++)
-                            {
-                                ChartArea chartArea = chart.ChartAreas[i];
-                                RectangleF rectangleF = ChartAreaClientRectangle(chart, chartArea);
-                                chartArea.Visible = rectangleF.Contains(args.Location);
-                            }
-                        }
-                    };
-
-                case ChartFunction.ChangeChartAreaLineColor:
-                    return (Chart chart) =>
-                    {
-                        for (int i = 0; i < chart.ChartAreas.Count; i++)
-                        {
-                            ChartArea chartArea = chart.ChartAreas[i];
-                            RectangleF rectangleF = ChartAreaClientRectangle(chart, chartArea);
-                            if(rectangleF.Contains(args.Location))
-                            {
-                                for (int j = 0; j < chart.Series.Count; j++)
-                                {
-                                    Series series = chart.Series[j];
-                                    if (chartArea.Name == series.ChartArea)
-                                    {
-                                        series.Color = GetRandomColor();
-                                        break;
-                                    }
-                                }
-                                break;
-                            }
-                        }
-                    };
-
-                case ChartFunction.GetChartAreaInnerCoordinate:
-                    if(objs.Length > 0)
-                    {
-                        Action<ChartArea , PointF> processAction = objs[0] as Action<ChartArea , PointF>;
-                        if(processAction != null)
-                        {
-                            return (Chart chart) =>
-                            {
-                                PointF coordinate;
-                                for (int i = 0; i < chart.ChartAreas.Count; i++)
-                                {
-                                    ChartArea chartArea = chart.ChartAreas[i];
-                                    if(GetCoordinateOfMousePositionInChartArea(chart , chartArea , args.Location , out coordinate))
-                                    {
-                                        processAction(chartArea, coordinate);
-                                        break;
-                                    }
-                                }
-                            };
-                        }
-                    }
-                    break;
             }
-            return null;
-        }
-
-        static public void RegistEvent(this Chart chart , ControlEvent controlEvent , ChartFunction chartFunction , params object[] paras)
-        {
-            switch (controlEvent)
-            {
-                case ControlEvent.DoubleClick:
-                    Action<object, MouseEventArgs> action = GetDoubleClickAction(chart, chartFunction, paras);
-                    chart.MouseDoubleClick += new MouseEventHandler(action);
-                    break;
-            }
+            toolTip.Tag = null;
+            toolTip.Hide(window);
         }
 
         static Color GetRandomColor()
@@ -132,7 +42,7 @@ namespace WinformControlExt.ChartExts
             return Color.FromArgb(R - 2, G, B);
         }
 
-        static RectangleF ChartAreaClientRectangle(Chart chart, ChartArea chartArea)
+        static RectangleF ChartAreaClientRectangle(this Chart chart, ChartArea chartArea)
         {
             RectangleF rectangle = chartArea.Position.ToRectangleF();
             float pw = chart.ClientSize.Width / 100f;
@@ -141,9 +51,9 @@ namespace WinformControlExt.ChartExts
                 pw * rectangle.Width, ph * rectangle.Height);
         }
 
-        static bool GetCoordinateOfMousePositionInChartArea(Chart chart , ChartArea chartArea , Point mousePosition , out PointF coordinate)
+        static public bool GetCoordinateOfMousePositionInChartArea(this Chart chart , ChartArea chartArea , Point mousePosition , out PointF coordinate)
         {
-            RectangleF rectangle = ChartAreaClientRectangle(chart, chartArea);
+            RectangleF rectangle = chart.ChartAreaClientRectangle(chartArea);
             if (rectangle.Contains(mousePosition))
             {
 
@@ -153,5 +63,20 @@ namespace WinformControlExt.ChartExts
             coordinate = PointF.Empty;
             return false;
         }
+
+        static public ChartArea GetChartArea(this Chart chart , Point mousePosition)
+        {
+            for (int i = 0; i < chart.ChartAreas.Count; i++)
+            {
+                ChartArea chartArea = chart.ChartAreas[i];
+                RectangleF rectangleF = chart.ChartAreaClientRectangle(chartArea);
+                if (rectangleF.Contains(mousePosition))
+                {
+                    return chartArea;
+                }
+            }
+            return null;
+        }
     }
+#endif
 }

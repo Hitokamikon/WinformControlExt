@@ -15,38 +15,122 @@ namespace Examples.Charts
 {
     internal partial class ChartExtExampleForm : Form
     {
-        internal Chart showingChart { get; private set; }
+        Chart showingChart { get; set; }
 
         internal ChartExtExampleForm()
         {
             InitializeComponent();
+
             Action<ChartArea, PointF> printCoordinate = (ChartArea chartArea, PointF point) =>
             {
                 MessageBox.Show(string.Format("在ChartArea[{0}]中，点击了坐标{1}", chartArea.Name, point));
             };
 
+            Action<Series, DataPoint> processPoint = (Series series, DataPoint point) =>
+           {
+               textBox1.Text = point.ToString();
+           };
 
-            AddChartExample(new ChartExtExample("双击事件/切换显示", 
-                new List<string>(new string[] { "chart.RegistEvent(ControlEvent.DoubleClick , ChartFunction.One_Multi_Switch);" }) ,
-                "鼠标在一个ChartArea上双击可以切换[1个/多个]ChartArea显示", 4, 
-                (Chart chart) => { chart.RegistEvent(ControlEvent.DoubleClick, ChartFunction.One_Multi_Switch); }));
+            #region 双击事件
+            AddChartExample(new ChartExtExample("双击事件/切换显示",
+                new List<string>(new string[] { "chart.RegistEvent(ControlEvent.DoubleClick , ChartFunction.One_Multi_Switch);" }),
+                "鼠标在一个ChartArea上双击可以切换[1个/多个]ChartArea显示", 4,
+                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.DoubleClick, ChartClickFunction.One_Multi_Switch); }));
 
             AddChartExample(new ChartExtExample("双击事件/改变线条颜色",
                 new List<string>(new string[] { "chart.RegistEvent(ControlEvent.DoubleClick , ChartFunction.ChangeChartAreaLineColor);" }),
                 "鼠标在一个ChartArea上双击可以改变该ChartArea的线条颜色", 4,
-                (Chart chart) => { chart.RegistEvent(ControlEvent.DoubleClick, ChartFunction.ChangeChartAreaLineColor); }));
+                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.DoubleClick, ChartClickFunction.ChangeChartAreaLineColor); }));
 
             AddChartExample(new ChartExtExample("双击事件/获取坐标",
-                new List<string>(new string[] { "Action<ChartArea, PointF> printCoordinate = (ChartArea chartArea, PointF point) =>", 
+                new List<string>(new string[] { "Action<ChartArea, PointF> printCoordinate = (ChartArea chartArea, PointF point) =>",
                     "{" ,
                     "\t//获取坐标后的处理方法" ,
                     "}" ,
                     "chart.RegistEvent(ControlEvent.DoubleClick , ChartFunction.GetChartAreaInnerCoordinate , printCoordinate);" }),
-                "鼠标在一个ChartArea上双击可以改变该ChartArea的线条颜色", 4,
-                (Chart chart) => { chart.RegistEvent(ControlEvent.DoubleClick, ChartFunction.GetChartAreaInnerCoordinate , printCoordinate); }));
+                "鼠标在一个ChartArea上双击可以获取鼠标在该ChartArea上的坐标，并对该坐标进行自定义处理", 4,
+                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.DoubleClick, ChartClickFunction.GetChartAreaInnerCoordinate, printCoordinate); }));
+
+            AddChartExample(new ChartExtExample("双击事件/复制点列",
+                new List<string>(new string[] { "chart.RegistEvent(ControlEvent.DoubleClick , ChartFunction.CopyPoints);" }),
+                "鼠标在一个ChartArea上双击可以复制该ChartArea中的点列", 4,
+                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.DoubleClick, ChartClickFunction.CopyPoints); }));
+            #endregion
+
+            #region 左键单击事件
+            AddChartExample(new ChartExtExample("左键单击事件/切换显示",
+                new List<string>(new string[] { "chart.RegistEvent(ControlEvent.DoubleClick , ChartFunction.One_Multi_Switch);" }),
+                "鼠标在一个ChartArea上左键单击可以切换[1个/多个]ChartArea显示", 4,
+                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.LeftClick, ChartClickFunction.One_Multi_Switch); }));
+
+            AddChartExample(new ChartExtExample("左键单击事件/改变线条颜色",
+                new List<string>(new string[] { "chart.RegistEvent(ControlEvent.DoubleClick , ChartFunction.ChangeChartAreaLineColor);" }),
+                "鼠标在一个ChartArea上左键单击可以改变该ChartArea的线条颜色", 4,
+                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.LeftClick, ChartClickFunction.ChangeChartAreaLineColor); }));
+
+            AddChartExample(new ChartExtExample("左键单击事件/获取坐标",
+                new List<string>(new string[] { "Action<ChartArea, PointF> printCoordinate = (ChartArea chartArea, PointF point) =>",
+                    "{" ,
+                    "\t//获取坐标后的处理方法" ,
+                    "}" ,
+                    "chart.RegistEvent(ControlEvent.DoubleClick , ChartFunction.GetChartAreaInnerCoordinate , printCoordinate);" }),
+                "鼠标在一个ChartArea上左键单击可以获取鼠标在该ChartArea上的坐标，并对该坐标进行自定义处理", 4,
+                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.LeftClick, ChartClickFunction.GetChartAreaInnerCoordinate, printCoordinate); }));
+
+            AddChartExample(new ChartExtExample("左键单击事件/复制点列",
+                new List<string>(new string[] { "chart.RegistEvent(ControlEvent.LeftClick , ChartFunction.CopyPoints);" }),
+                "鼠标在一个ChartArea上左键单击可以复制该ChartArea中的点列", 4,
+                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.LeftClick, ChartClickFunction.CopyPoints); }));
+            #endregion
+
+            #region 右键单击事件
+            AddChartExample(new ChartExtExample("右键单击事件/切换显示",
+                new List<string>(new string[] { "chart.RegistEvent(ControlEvent.RightClick , ChartFunction.One_Multi_Switch);" }),
+                "鼠标在一个ChartArea上右键单击可以切换[1个/多个]ChartArea显示", 4,
+                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.RightClick, ChartClickFunction.One_Multi_Switch); }));
+
+            AddChartExample(new ChartExtExample("右键单击事件/改变线条颜色",
+                new List<string>(new string[] { "chart.RegistEvent(ControlEvent.RightClick , ChartFunction.ChangeChartAreaLineColor);" }),
+                "鼠标在一个ChartArea上右键单击可以改变该ChartArea的线条颜色", 4,
+                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.RightClick, ChartClickFunction.ChangeChartAreaLineColor); }));
+
+            AddChartExample(new ChartExtExample("右键单击事件/获取坐标",
+                new List<string>(new string[] { "Action<ChartArea, PointF> printCoordinate = (ChartArea chartArea, PointF point) =>",
+                    "{" ,
+                    "\t//获取坐标后的处理方法" ,
+                    "}" ,
+                    "chart.RegistEvent(ControlEvent.RightClick , ChartFunction.GetChartAreaInnerCoordinate , printCoordinate);" }),
+                "鼠标在一个ChartArea上右键单击可以获取鼠标在该ChartArea上的坐标，并对该坐标进行自定义处理", 4,
+                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.RightClick, ChartClickFunction.GetChartAreaInnerCoordinate, printCoordinate); }));
+
+            AddChartExample(new ChartExtExample("右键单击事件/复制点列",
+                new List<string>(new string[] { "chart.RegistEvent(ControlEvent.RightClick , ChartFunction.CopyPoints);" }),
+                "鼠标在一个ChartArea上右键单击可以复制该ChartArea中的点列", 4,
+                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.RightClick, ChartClickFunction.CopyPoints); }));
+            #endregion
+
+            #region 鼠标移动事件
+            AddChartExample(new ChartExtExample("鼠标移动事件/显示数据点",
+                new List<string>(new string[] { "chart.RegistMouseMoveEvent(ChartMouseMoveFunction.PointToolTip , Color.Red , 10 , MarkerStyle.Circle);" }),
+                "鼠标移动到图表的一个点附近时可以查看该点坐标", 4,
+                (Chart chart) => { chart.RegistMouseMoveEvent(ChartMouseMoveFunction.PointToolTip, Color.Red, 10, MarkerStyle.Circle); }));
+
+            AddChartExample(new ChartExtExample("鼠标移动事件/处理数据点",
+                new List<string>(new string[] { "Action<Series, DataPoint> processPoint = (Series series, DataPoint point) =>",
+                    "{",
+                    "\t//自定义的操作",
+                    "};",
+                    "chart.RegistMouseMoveEvent(ChartMouseMoveFunction.ProcessPoint , processPoint);" }),
+                "鼠标移动到图表的一个点附近时可以对该点进行处理", 4,
+                (Chart chart) => { chart.RegistMouseMoveEvent(ChartMouseMoveFunction.ProcessPoint, processPoint); }));
+            #endregion
+
+            #region 鼠标滚轮事件
+
+            #endregion
         }
 
-        internal void AddChartExample(ChartExtExample chartExtExample)
+        void AddChartExample(ChartExtExample chartExtExample)
         {
             ChartExampleTreeNode chartExampleTreeNode = new ChartExampleTreeNode(chartExtExample);
             List<string> pathList = new List<string>(chartExtExample.path.Split(new char[] {'/' }));
@@ -102,7 +186,7 @@ namespace Examples.Charts
             }
         }
 
-        internal void ShowChartExample(ChartExtExample chartExtExample)
+        void ShowChartExample(ChartExtExample chartExtExample)
         {
             if (showingChart != null) showingChart.Dispose();
             showingChart = chartExtExample.CreateChart();
@@ -112,10 +196,11 @@ namespace Examples.Charts
             chartExtExample.SetFullCodeToRichTextBox(richTextBox1);
 
             descriptionToolStripStatusLabel.Text = chartExtExample.description;
+            showingChart.MouseMove += ChartExtExampleForm_MouseMove;
             正弦波();
         }
 
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             ChartExampleTreeNode chartExampleTreeNode = e.Node as ChartExampleTreeNode;
             if(chartExampleTreeNode != null)
@@ -124,25 +209,22 @@ namespace Examples.Charts
             }
         }
 
-        private void 正弦波ToolStripMenuItem_Click(object sender, EventArgs e)
+        void ChartExtExampleForm_MouseMove(object sender, MouseEventArgs e)
         {
-            正弦波();
-        }
-
-        void 正弦波()
-        {
-            for (int i = 0; i < showingChart.Series.Count; i++)
+            if(showingChart != null)
             {
-                Series series = showingChart.Series[i];
-                if (series != null)
+                PointF coordinate = e.Location;
+                for(int i = 0; i < showingChart.ChartAreas.Count; i++)
                 {
-                    series.Points.Clear();
-                    for (int j = 0; j < 100; j++)
+                    ChartArea chartArea = showingChart.ChartAreas[i];
+                    if(showingChart.GetCoordinateOfMousePositionInChartArea(chartArea, e.Location, out coordinate))
                     {
-                        series.Points.Add(Math.Sin(j * 0.1));
+                        coordinateToolStripStatusLabel.Text = String.Format("{0}-{1}" , chartArea.Name , coordinate);
+                        return;
                     }
                 }
             }
+            coordinateToolStripStatusLabel.Text = "(0,0)";
         }
     }
 }

@@ -9,7 +9,7 @@ namespace WinformControlExt.ControlEvents
     /// <summary>
     /// 控件事件
     /// </summary>
-    public enum ControlEvent
+    public enum ControlClickEvent
     {
         LeftClick,
         RightClick,

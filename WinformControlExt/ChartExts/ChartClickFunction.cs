@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace WinformControlExt.ChartExts
 {
-    public enum ChartFunction
+#if ComplieChart
+    public enum ChartClickFunction
     {
         One_Multi_Switch,
         ChangeChartAreaLineColor,
         GetChartAreaInnerCoordinate,
+        CopyPoints,
     }
+#endif
 }

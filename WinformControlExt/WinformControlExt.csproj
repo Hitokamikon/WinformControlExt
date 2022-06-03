@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;ComplieChart</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -26,7 +26,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;ComplieChart</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -44,9 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChartExts\ChartExt.Click.cs" />
     <Compile Include="ChartExts\ChartExt.cs" />
-    <Compile Include="ChartExts\ChartFunction.cs" />
-    <Compile Include="ControlEvents\ControlEvent.cs" />
+    <Compile Include="ChartExts\ChartClickFunction.cs" />
+    <Compile Include="ChartExts\ChartExt.MouseMove.cs" />
+    <Compile Include="ChartExts\ChartMouseMoveFunction.cs" />
+    <Compile Include="ChartExts\ChartMouseWheelFunction.cs" />
+    <Compile Include="ChartExts\MarkPoint.cs" />
+    <Compile Include="ControlEvents\ControlClickEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
