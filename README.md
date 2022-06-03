@@ -1,5 +1,5 @@
 # 本项目目的
-&emsp;&emsp;提供Winform中各种控件的扩展功能
+&emsp;&emsp;提供Winform中各种控件的扩展功能。
 
 # 如何使用
 

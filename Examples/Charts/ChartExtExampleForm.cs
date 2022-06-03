@@ -126,6 +126,10 @@ namespace Examples.Charts
             #endregion
 
             #region 鼠标滚轮事件
+            AddChartExample(new ChartExtExample("鼠标滚轮事件/坐标轴缩放",
+                new List<string>(new string[] { "chart.RegistMouseWheelEvent(ChartMouseWheelFunction.Scale, 1f , 1f , 1f , 0 , 1);" }),
+                "鼠标在一个ChartArea内转动滚轮时可以对该图表进行缩放", 4,
+                (Chart chart) => { chart.RegistMouseWheelEvent(ChartMouseWheelFunction.Scale, 1f , 1f , 1f , 0 , 1); }));
 
             #endregion
         }
