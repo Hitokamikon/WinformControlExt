@@ -44,8 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChartExts\ChartDragPoint.cs" />
     <Compile Include="ChartExts\ChartExt.Click.cs" />
     <Compile Include="ChartExts\ChartExt.cs" />
+    <Compile Include="ChartExts\ChartExt.Drag.cs" />
     <Compile Include="ChartExts\ChartExt.MouseMove.cs" />
     <Compile Include="ChartExts\ChartExt.MouseWheel.cs" />
     <Compile Include="ChartExts\MarkPoint.cs" />
