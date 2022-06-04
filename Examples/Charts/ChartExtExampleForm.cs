@@ -135,7 +135,7 @@ namespace Examples.Charts
 
             #region 鼠标拖拽事件
             AddChartExample(new ChartExtExample("鼠标拖拽事件/坐标轴移动",
-                new List<string>(new string[] { "chart.RegistMouseWheelScaleEvent(1f , 1f , 1f , 0 , 1);" }),
+                new List<string>(new string[] { "chart.RegistDragMoveEvent(0 , 1);" }),
                 "鼠标在一个ChartArea内拖拽时可以移动坐标轴", 4,
                 (Chart chart) => { chart.RegistDragMoveEvent(0 , 1); }));
             #endregion

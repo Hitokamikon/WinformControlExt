@@ -168,7 +168,7 @@
             // 
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer3.Location = new System.Drawing.Point(0, 39);
+            this.splitContainer3.Location = new System.Drawing.Point(0, 41);
             this.splitContainer3.Name = "splitContainer3";
             // 
             // splitContainer3.Panel1
@@ -178,7 +178,7 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.textBox1);
-            this.splitContainer3.Size = new System.Drawing.Size(871, 402);
+            this.splitContainer3.Size = new System.Drawing.Size(871, 400);
             this.splitContainer3.SplitterDistance = 604;
             this.splitContainer3.TabIndex = 2;
             // 
@@ -187,7 +187,7 @@
             this.chartPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartPanel.Location = new System.Drawing.Point(0, 0);
             this.chartPanel.Name = "chartPanel";
-            this.chartPanel.Size = new System.Drawing.Size(604, 402);
+            this.chartPanel.Size = new System.Drawing.Size(604, 400);
             this.chartPanel.TabIndex = 3;
             // 
             // textBox1
@@ -198,7 +198,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(263, 402);
+            this.textBox1.Size = new System.Drawing.Size(263, 400);
             this.textBox1.TabIndex = 0;
             this.textBox1.WordWrap = false;
             // 
@@ -211,7 +211,7 @@
             this.图表ToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(871, 39);
+            this.menuStrip1.Size = new System.Drawing.Size(871, 41);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
