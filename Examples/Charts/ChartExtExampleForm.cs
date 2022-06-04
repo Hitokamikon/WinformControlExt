@@ -33,103 +33,103 @@ namespace Examples.Charts
 
             #region 双击事件
             AddChartExample(new ChartExtExample("双击事件/切换显示",
-                new List<string>(new string[] { "chart.RegistEvent(ControlEvent.DoubleClick , ChartFunction.One_Multi_Switch);" }),
+                new List<string>(new string[] { "chart.RegistClickOne_Multi_SwitchEvent(ControlClickEvent.DoubleClick);" }),
                 "鼠标在一个ChartArea上双击可以切换[1个/多个]ChartArea显示", 4,
-                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.DoubleClick, ChartClickFunction.One_Multi_Switch); }));
+                (Chart chart) => { chart.RegistClickOne_Multi_SwitchEvent(ControlClickEvent.DoubleClick); }));
 
             AddChartExample(new ChartExtExample("双击事件/改变线条颜色",
-                new List<string>(new string[] { "chart.RegistEvent(ControlEvent.DoubleClick , ChartFunction.ChangeChartAreaLineColor);" }),
+                new List<string>(new string[] { "chart.RegistClickChangeChartAreaLineColorEvent(ControlClickEvent.DoubleClick);" }),
                 "鼠标在一个ChartArea上双击可以改变该ChartArea的线条颜色", 4,
-                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.DoubleClick, ChartClickFunction.ChangeChartAreaLineColor); }));
+                (Chart chart) => { chart.RegistClickChangeChartAreaLineColorEvent(ControlClickEvent.DoubleClick); }));
 
             AddChartExample(new ChartExtExample("双击事件/获取坐标",
                 new List<string>(new string[] { "Action<ChartArea, PointF> printCoordinate = (ChartArea chartArea, PointF point) =>",
                     "{" ,
                     "\t//获取坐标后的处理方法" ,
                     "}" ,
-                    "chart.RegistEvent(ControlEvent.DoubleClick , ChartFunction.GetChartAreaInnerCoordinate , printCoordinate);" }),
+                    "chart.RegistClickGetChartAreaInnerCoordinateEvent(ControlClickEvent.DoubleClick, printCoordinate);" }),
                 "鼠标在一个ChartArea上双击可以获取鼠标在该ChartArea上的坐标，并对该坐标进行自定义处理", 4,
-                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.DoubleClick, ChartClickFunction.GetChartAreaInnerCoordinate, printCoordinate); }));
+                (Chart chart) => { chart.RegistClickGetChartAreaInnerCoordinateEvent(ControlClickEvent.DoubleClick, printCoordinate); }));
 
             AddChartExample(new ChartExtExample("双击事件/复制点列",
-                new List<string>(new string[] { "chart.RegistEvent(ControlEvent.DoubleClick , ChartFunction.CopyPoints);" }),
+                new List<string>(new string[] { "chart.RegistClickCopyPointsEvent(ControlClickEvent.DoubleClick);" }),
                 "鼠标在一个ChartArea上双击可以复制该ChartArea中的点列", 4,
-                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.DoubleClick, ChartClickFunction.CopyPoints); }));
+                (Chart chart) => { chart.RegistClickCopyPointsEvent(ControlClickEvent.DoubleClick); }));
             #endregion
 
             #region 左键单击事件
             AddChartExample(new ChartExtExample("左键单击事件/切换显示",
-                new List<string>(new string[] { "chart.RegistEvent(ControlEvent.DoubleClick , ChartFunction.One_Multi_Switch);" }),
+                new List<string>(new string[] { "chart.RegistClickOne_Multi_SwitchEvent(ControlClickEvent.LeftClick);" }),
                 "鼠标在一个ChartArea上左键单击可以切换[1个/多个]ChartArea显示", 4,
-                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.LeftClick, ChartClickFunction.One_Multi_Switch); }));
+                (Chart chart) => { chart.RegistClickOne_Multi_SwitchEvent(ControlClickEvent.LeftClick); }));
 
             AddChartExample(new ChartExtExample("左键单击事件/改变线条颜色",
-                new List<string>(new string[] { "chart.RegistEvent(ControlEvent.DoubleClick , ChartFunction.ChangeChartAreaLineColor);" }),
+                new List<string>(new string[] { "chart.RegistClickChangeChartAreaLineColorEvent(ControlClickEvent.LeftClick);" }),
                 "鼠标在一个ChartArea上左键单击可以改变该ChartArea的线条颜色", 4,
-                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.LeftClick, ChartClickFunction.ChangeChartAreaLineColor); }));
+                (Chart chart) => { chart.RegistClickChangeChartAreaLineColorEvent(ControlClickEvent.LeftClick); }));
 
             AddChartExample(new ChartExtExample("左键单击事件/获取坐标",
                 new List<string>(new string[] { "Action<ChartArea, PointF> printCoordinate = (ChartArea chartArea, PointF point) =>",
                     "{" ,
                     "\t//获取坐标后的处理方法" ,
                     "}" ,
-                    "chart.RegistEvent(ControlEvent.DoubleClick , ChartFunction.GetChartAreaInnerCoordinate , printCoordinate);" }),
+                    "chart.RegistClickGetChartAreaInnerCoordinateEvent(ControlClickEvent.LeftClick, printCoordinate);" }),
                 "鼠标在一个ChartArea上左键单击可以获取鼠标在该ChartArea上的坐标，并对该坐标进行自定义处理", 4,
-                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.LeftClick, ChartClickFunction.GetChartAreaInnerCoordinate, printCoordinate); }));
+                (Chart chart) => { chart.RegistClickGetChartAreaInnerCoordinateEvent(ControlClickEvent.LeftClick, printCoordinate); }));
 
             AddChartExample(new ChartExtExample("左键单击事件/复制点列",
-                new List<string>(new string[] { "chart.RegistEvent(ControlEvent.LeftClick , ChartFunction.CopyPoints);" }),
+                new List<string>(new string[] { "chart.RegistClickCopyPointsEvent(ControlClickEvent.LeftClick);" }),
                 "鼠标在一个ChartArea上左键单击可以复制该ChartArea中的点列", 4,
-                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.LeftClick, ChartClickFunction.CopyPoints); }));
+                (Chart chart) => { chart.RegistClickCopyPointsEvent(ControlClickEvent.LeftClick); }));
             #endregion
 
             #region 右键单击事件
             AddChartExample(new ChartExtExample("右键单击事件/切换显示",
-                new List<string>(new string[] { "chart.RegistEvent(ControlEvent.RightClick , ChartFunction.One_Multi_Switch);" }),
+                new List<string>(new string[] { "chart.RegistClickOne_Multi_SwitchEvent(ControlClickEvent.RightClick);" }),
                 "鼠标在一个ChartArea上右键单击可以切换[1个/多个]ChartArea显示", 4,
-                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.RightClick, ChartClickFunction.One_Multi_Switch); }));
+                (Chart chart) => { chart.RegistClickOne_Multi_SwitchEvent(ControlClickEvent.RightClick); }));
 
             AddChartExample(new ChartExtExample("右键单击事件/改变线条颜色",
-                new List<string>(new string[] { "chart.RegistEvent(ControlEvent.RightClick , ChartFunction.ChangeChartAreaLineColor);" }),
+                new List<string>(new string[] { "chart.RegistClickChangeChartAreaLineColorEvent(ControlClickEvent.RightClick);" }),
                 "鼠标在一个ChartArea上右键单击可以改变该ChartArea的线条颜色", 4,
-                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.RightClick, ChartClickFunction.ChangeChartAreaLineColor); }));
+                (Chart chart) => { chart.RegistClickChangeChartAreaLineColorEvent(ControlClickEvent.RightClick); }));
 
             AddChartExample(new ChartExtExample("右键单击事件/获取坐标",
                 new List<string>(new string[] { "Action<ChartArea, PointF> printCoordinate = (ChartArea chartArea, PointF point) =>",
                     "{" ,
                     "\t//获取坐标后的处理方法" ,
                     "}" ,
-                    "chart.RegistEvent(ControlEvent.RightClick , ChartFunction.GetChartAreaInnerCoordinate , printCoordinate);" }),
+                    "chart.RegistClickGetChartAreaInnerCoordinateEvent(ControlClickEvent.RightClick, printCoordinate);" }),
                 "鼠标在一个ChartArea上右键单击可以获取鼠标在该ChartArea上的坐标，并对该坐标进行自定义处理", 4,
-                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.RightClick, ChartClickFunction.GetChartAreaInnerCoordinate, printCoordinate); }));
+                (Chart chart) => { chart.RegistClickGetChartAreaInnerCoordinateEvent(ControlClickEvent.RightClick, printCoordinate); }));
 
             AddChartExample(new ChartExtExample("右键单击事件/复制点列",
-                new List<string>(new string[] { "chart.RegistEvent(ControlEvent.RightClick , ChartFunction.CopyPoints);" }),
+                new List<string>(new string[] { "chart.RegistClickCopyPointsEvent(ControlClickEvent.RightClick);" }),
                 "鼠标在一个ChartArea上右键单击可以复制该ChartArea中的点列", 4,
-                (Chart chart) => { chart.RegistClickEvent(ControlClickEvent.RightClick, ChartClickFunction.CopyPoints); }));
+                (Chart chart) => { chart.RegistClickCopyPointsEvent(ControlClickEvent.RightClick); }));
             #endregion
 
             #region 鼠标移动事件
             AddChartExample(new ChartExtExample("鼠标移动事件/显示数据点",
-                new List<string>(new string[] { "chart.RegistMouseMoveEvent(ChartMouseMoveFunction.PointToolTip , Color.Red , 10 , MarkerStyle.Circle);" }),
+                new List<string>(new string[] { "chart.RegistMouseMovePointToolTipEvent(Color.Red, 10, MarkerStyle.Circle);" }),
                 "鼠标移动到图表的一个点附近时可以查看该点坐标", 4,
-                (Chart chart) => { chart.RegistMouseMoveEvent(ChartMouseMoveFunction.PointToolTip, Color.Red, 10, MarkerStyle.Circle); }));
+                (Chart chart) => { chart.RegistMouseMovePointToolTipEvent(Color.Red, 10, MarkerStyle.Circle); }));
 
             AddChartExample(new ChartExtExample("鼠标移动事件/处理数据点",
                 new List<string>(new string[] { "Action<Series, DataPoint> processPoint = (Series series, DataPoint point) =>",
                     "{",
                     "\t//自定义的操作",
                     "};",
-                    "chart.RegistMouseMoveEvent(ChartMouseMoveFunction.ProcessPoint , processPoint);" }),
+                    "chart.RegistMouseMoveProcessPointEvent(processPoint);" }),
                 "鼠标移动到图表的一个点附近时可以对该点进行处理", 4,
-                (Chart chart) => { chart.RegistMouseMoveEvent(ChartMouseMoveFunction.ProcessPoint, processPoint); }));
+                (Chart chart) => { chart.RegistMouseMoveProcessPointEvent(processPoint); }));
             #endregion
 
             #region 鼠标滚轮事件
             AddChartExample(new ChartExtExample("鼠标滚轮事件/坐标轴缩放",
-                new List<string>(new string[] { "chart.RegistMouseWheelEvent(ChartMouseWheelFunction.Scale, 1f , 1f , 1f , 0 , 1);" }),
+                new List<string>(new string[] { "chart.RegistMouseWheelScaleEvent(1f , 1f , 1f , 0 , 1);" }),
                 "鼠标在一个ChartArea内转动滚轮时可以对该图表进行缩放", 4,
-                (Chart chart) => { chart.RegistMouseWheelEvent(ChartMouseWheelFunction.Scale, 1f , 1f , 1f , 0 , 1); }));
+                (Chart chart) => { chart.RegistMouseWheelScaleEvent(1f , 1f , 1f , 0 , 1); }));
 
             #endregion
         }

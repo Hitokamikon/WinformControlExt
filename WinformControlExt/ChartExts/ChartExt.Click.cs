@@ -13,171 +13,185 @@ namespace WinformControlExt.ChartExts
 #if ComplieChart
     public partial class ChartExt
     {
-        static Action<object, MouseEventArgs> GetDoubleClickAction(Chart chart, ChartClickFunction chartFunction, params object[] paras)
+        static public void RegistClickOne_Multi_SwitchEvent(this Chart chart, ControlClickEvent controlClickEvent)
         {
-            return (object sender, MouseEventArgs args) =>
+            MouseEventHandler mouseEventHandler = (object sender, MouseEventArgs e) =>
             {
-                Action<Chart> action = null;
-                switch (args.Button)
+                switch (controlClickEvent)
                 {
-                    case MouseButtons.Left:
-                        action = GetChartClickAction(chartFunction, args, paras);
+                    case ControlClickEvent.LeftClick:
+                        if (e.Button != MouseButtons.Left) return;
+                        break;
+
+                    case ControlClickEvent.RightClick:
+                        if (e.Button != MouseButtons.Right) return;
                         break;
                 }
-                if (action != null)
-                    action(chart);
-            };
-        }
 
-        static Action<object, MouseEventArgs> GetLeftClickAction(Chart chart, ChartClickFunction chartFunction, params object[] paras)
-        {
-            return (object sender, MouseEventArgs args) =>
-            {
-                Action<Chart> action = null;
-                switch (args.Button)
+                int visibleAreaCount = chart.ChartAreas.Where(area => area.Visible).Count();
+                if (visibleAreaCount == 1)
                 {
-                    case MouseButtons.Left:
-                        action = GetChartClickAction(chartFunction, args, paras);
-                        break;
-                }
-                if (action != null)
-                    action(chart);
-            };
-        }
-
-        static Action<object, MouseEventArgs> GetRightClickAction(Chart chart, ChartClickFunction chartFunction, params object[] paras)
-        {
-            return (object sender, MouseEventArgs args) =>
-            {
-                Action<Chart> action = null;
-                switch (args.Button)
-                {
-                    case MouseButtons.Right:
-                        action = GetChartClickAction(chartFunction, args, paras);
-                        break;
-                }
-                if (action != null)
-                    action(chart);
-            };
-        }
-
-        static Action<Chart> GetChartClickAction(ChartClickFunction chartFunction, MouseEventArgs args, params object[] objs)
-        {
-            switch (chartFunction)
-            {
-                case ChartClickFunction.One_Multi_Switch:
-                    return (Chart chart) =>
+                    for (int i = 0; i < chart.ChartAreas.Count; i++)
                     {
-                        int visibleAreaCount = chart.ChartAreas.Where(area => area.Visible).Count();
-                        if (visibleAreaCount == 1)
-                        {
-                            for (int i = 0; i < chart.ChartAreas.Count; i++)
-                            {
-                                ChartArea chartArea = chart.ChartAreas[i];
-                                chartArea.Visible = true;
-                            }
-                        }
-                        else
-                        {
-                            for (int i = 0; i < chart.ChartAreas.Count; i++)
-                            {
-                                ChartArea chartArea = chart.ChartAreas[i];
-                                RectangleF rectangleF = chart.ChartAreaClientRectangle(chartArea);
-                                chartArea.Visible = rectangleF.Contains(args.Location);
-                            }
-                        }
-                    };
-
-                case ChartClickFunction.ChangeChartAreaLineColor:
-                    return (Chart chart) =>
-                    {
-                        ChartArea chartArea = chart.GetChartArea(args.Location);
-                        if (chartArea != null)
-                        {
-                            for (int j = 0; j < chart.Series.Count; j++)
-                            {
-                                Series series = chart.Series[j];
-                                if (chartArea.Name == series.ChartArea)
-                                {
-                                    series.Color = GetRandomColor();
-                                    break;
-                                }
-                            }
-                        }
-                    };
-
-                case ChartClickFunction.GetChartAreaInnerCoordinate:
-                    if (objs.Length > 0)
-                    {
-                        Action<ChartArea, PointF> processAction = objs[0] as Action<ChartArea, PointF>;
-                        if (processAction != null)
-                        {
-                            return (Chart chart) =>
-                            {
-                                PointF coordinate;
-                                for (int i = 0; i < chart.ChartAreas.Count; i++)
-                                {
-                                    ChartArea chartArea = chart.ChartAreas[i];
-                                    if (chart.GetCoordinateOfMousePositionInChartArea(chartArea, args.Location, out coordinate))
-                                    {
-                                        processAction(chartArea, coordinate);
-                                        break;
-                                    }
-                                }
-                            };
-                        }
+                        ChartArea chartArea = chart.ChartAreas[i];
+                        chartArea.Visible = true;
                     }
-                    break;
-
-                case ChartClickFunction.CopyPoints:
-                    return (Chart chart) =>
+                }
+                else
+                {
+                    for (int i = 0; i < chart.ChartAreas.Count; i++)
                     {
-                        ChartArea chartArea = chart.GetChartArea(args.Location);
-                        if (chartArea != null)
-                        {
-                            StringBuilder copyText = new StringBuilder();
-                            for (int j = 0; j < chart.Series.Count; j++)
-                            {
-                                Series series = chart.Series[j];
-                                if (chartArea.Name == series.ChartArea)
-                                {
-                                    copyText.Append("Series:");
-                                    copyText.Append(series.Name + "\r\n");
-                                    for (int k = 0; k < series.Points.Count; k++)
-                                    {
-                                        DataPoint point = series.Points[k];
-                                        copyText.Append(point.ToString() + "\r\n");
-                                    }
-                                    copyText.Append("\r\n");
-                                }
-                            }
-                            Clipboard.SetText(copyText.ToString());
-                        }
-                    };
-            }
-            return null;
-        }
+                        ChartArea chartArea = chart.ChartAreas[i];
+                        RectangleF rectangleF = chart.ChartAreaClientRectangle(chartArea);
+                        chartArea.Visible = rectangleF.Contains(e.Location);
+                    }
+                }
+            };
 
-        static public void RegistClickEvent(this Chart chart, ControlClickEvent controlEvent, ChartClickFunction chartFunction, params object[] paras)
-        {
-            Action<object, MouseEventArgs> action;
-            switch (controlEvent)
+            switch (controlClickEvent)
             {
                 case ControlClickEvent.DoubleClick:
-                    action = GetDoubleClickAction(chart, chartFunction, paras);
-                    chart.MouseDoubleClick += new MouseEventHandler(action);
+                    chart.MouseDoubleClick += mouseEventHandler;
                     break;
 
                 case ControlClickEvent.LeftClick:
-                    action = GetLeftClickAction(chart, chartFunction, paras);
-                    chart.MouseClick += new MouseEventHandler(action);
-                    break;
-
                 case ControlClickEvent.RightClick:
-                    action = GetRightClickAction(chart, chartFunction, paras);
-                    chart.MouseClick += new MouseEventHandler(action);
+                    chart.MouseClick += mouseEventHandler;
+                    break;
+            }
+        }
+
+        static public void RegistClickChangeChartAreaLineColorEvent(this Chart chart , ControlClickEvent controlClickEvent)
+        {
+            MouseEventHandler mouseEventHandler = (object sender, MouseEventArgs e) =>
+            {
+                switch (controlClickEvent)
+                {
+                    case ControlClickEvent.LeftClick:
+                        if (e.Button != MouseButtons.Left) return;
+                        break;
+
+                    case ControlClickEvent.RightClick:
+                        if (e.Button != MouseButtons.Right) return;
+                        break;
+                }
+                ChartArea chartArea = chart.GetChartArea(e.Location);
+                if (chartArea != null)
+                {
+                    for (int j = 0; j < chart.Series.Count; j++)
+                    {
+                        Series series = chart.Series[j];
+                        if (chartArea.Name == series.ChartArea)
+                        {
+                            series.Color = GetRandomColor();
+                            break;
+                        }
+                    }
+                }
+            };
+
+            switch (controlClickEvent)
+            {
+                case ControlClickEvent.DoubleClick:
+                    chart.MouseDoubleClick += mouseEventHandler;
                     break;
 
+                case ControlClickEvent.LeftClick:
+                case ControlClickEvent.RightClick:
+                    chart.MouseClick += mouseEventHandler;
+                    break;
+            }
+        }
+
+        static public void RegistClickGetChartAreaInnerCoordinateEvent(this Chart chart, ControlClickEvent controlClickEvent , Action<ChartArea, PointF> processAction)
+        {
+            MouseEventHandler mouseEventHandler = (object sender, MouseEventArgs e) =>
+            {
+                switch (controlClickEvent)
+                {
+                    case ControlClickEvent.LeftClick:
+                        if (e.Button != MouseButtons.Left) return;
+                        break;
+
+                    case ControlClickEvent.RightClick:
+                        if (e.Button != MouseButtons.Right) return;
+                        break;
+                }
+
+                PointF coordinate;
+                for (int i = 0; i < chart.ChartAreas.Count; i++)
+                {
+                    ChartArea chartArea = chart.ChartAreas[i];
+                    if (chart.GetCoordinateOfMousePositionInChartArea(chartArea, e.Location, out coordinate))
+                    {
+                        processAction(chartArea, coordinate);
+                        break;
+                    }
+                }
+
+            };
+
+            switch (controlClickEvent)
+            {
+                case ControlClickEvent.DoubleClick:
+                    chart.MouseDoubleClick += mouseEventHandler;
+                    break;
+
+                case ControlClickEvent.LeftClick:
+                case ControlClickEvent.RightClick:
+                    chart.MouseClick += mouseEventHandler;
+                    break;
+            }
+        }
+
+        static public void RegistClickCopyPointsEvent(this Chart chart, ControlClickEvent controlClickEvent)
+        {
+            MouseEventHandler mouseEventHandler = (object sender, MouseEventArgs e) =>
+            {
+                switch (controlClickEvent)
+                {
+                    case ControlClickEvent.LeftClick:
+                        if (e.Button != MouseButtons.Left) return;
+                        break;
+
+                    case ControlClickEvent.RightClick:
+                        if (e.Button != MouseButtons.Right) return;
+                        break;
+                }
+                ChartArea chartArea = chart.GetChartArea(e.Location);
+                if (chartArea != null)
+                {
+                    StringBuilder copyText = new StringBuilder();
+                    for (int j = 0; j < chart.Series.Count; j++)
+                    {
+                        Series series = chart.Series[j];
+                        if (chartArea.Name == series.ChartArea)
+                        {
+                            copyText.Append("Series:");
+                            copyText.Append(series.Name + "\r\n");
+                            for (int k = 0; k < series.Points.Count; k++)
+                            {
+                                DataPoint point = series.Points[k];
+                                copyText.Append(point.ToString() + "\r\n");
+                            }
+                            copyText.Append("\r\n");
+                        }
+                    }
+                    Clipboard.SetText(copyText.ToString());
+                }
+
+            };
+
+            switch (controlClickEvent)
+            {
+                case ControlClickEvent.DoubleClick:
+                    chart.MouseDoubleClick += mouseEventHandler;
+                    break;
+
+                case ControlClickEvent.LeftClick:
+                case ControlClickEvent.RightClick:
+                    chart.MouseClick += mouseEventHandler;
+                    break;
             }
         }
     }

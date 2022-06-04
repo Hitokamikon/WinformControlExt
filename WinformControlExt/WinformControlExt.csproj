@@ -46,11 +46,8 @@
   <ItemGroup>
     <Compile Include="ChartExts\ChartExt.Click.cs" />
     <Compile Include="ChartExts\ChartExt.cs" />
-    <Compile Include="ChartExts\ChartClickFunction.cs" />
     <Compile Include="ChartExts\ChartExt.MouseMove.cs" />
     <Compile Include="ChartExts\ChartExt.MouseWheel.cs" />
-    <Compile Include="ChartExts\ChartMouseMoveFunction.cs" />
-    <Compile Include="ChartExts\ChartMouseWheelFunction.cs" />
     <Compile Include="ChartExts\MarkPoint.cs" />
     <Compile Include="ControlEvents\ControlClickEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
